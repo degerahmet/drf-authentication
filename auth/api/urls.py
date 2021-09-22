@@ -7,6 +7,7 @@ from .views import (
     LoginAPIView,
     LogoutAllView,
     RegisterAPIView,
+    ChangePasswordView,
 )
 
 from knox import views as knox_views
@@ -16,4 +17,5 @@ urlpatterns = [
     path('auth/logout/', knox_views.LogoutView.as_view(), name="logout_view"),
     path('auth/logoutall/', LogoutAllView.as_view(), name="logout_all_view"),
     path('auth/register/', RegisterAPIView.as_view(), name="register_view"),
+    path('auth/change_password/', ChangePasswordView.as_view(), name='auth_change_password'),
 ]

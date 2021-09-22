@@ -1,6 +1,6 @@
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView,UpdateAPIView
 from rest_framework.permissions import AllowAny,IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.authentication import SessionAuthentication
@@ -12,7 +12,7 @@ from knox.auth import TokenAuthentication
 from django.contrib.auth import get_user_model,login,logout
 
 
-from .serializers import LoginSerializer,UserSerializer,RegisterSerializer
+from .serializers import LoginSerializer,UserSerializer,RegisterSerializer,ChangePasswordSerializer
 
 
 
@@ -66,3 +66,10 @@ class RegisterAPIView(GenericAPIView):
             "token" : token
         })
     
+class ChangePasswordView(UpdateAPIView):
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = [TokenAuthentication,SessionAuthentication]
+    serializer_class = ChangePasswordSerializer
+
+    def get_object(self, queryset=UserModel):
+        return self.request.user
