@@ -8,7 +8,7 @@ setuptools.setup(
 	name="drf_simple-auth-jwt",
 
 	# version of the module
-	version="0.0.1",
+	version="0.0.7",
 
 	# Name of Author
 	author="Ahmet Deger",
@@ -36,8 +36,9 @@ setuptools.setup(
 
 
 		install_requires=[
-		"knox",
+		"django-rest-knox",
 		"djangorestframework-simplejwt",
+		"boto3",
 		"jwt",
 		"datetime",
 	],
