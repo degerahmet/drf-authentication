@@ -8,7 +8,7 @@ setuptools.setup(
 	name="drf_simple-auth-jwt",
 
 	# version of the module
-	version="0.0.7",
+	version="0.0.8",
 
 	# Name of Author
 	author="Ahmet Deger",
