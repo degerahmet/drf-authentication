@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
 	# Here is the module name.
-	name="drf-simple-auth",
+	name="drf_awjwt",
 
 	# version of the module
 	version="0.0.1",
