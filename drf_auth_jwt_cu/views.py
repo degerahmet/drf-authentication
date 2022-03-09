@@ -1,16 +1,15 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView,UpdateAPIView
-from rest_framework.permissions import AllowAny,IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
-from rest_framework.authentication import SessionAuthentication
 
 
 
 from django.contrib.auth import get_user_model,login,logout
 
 
-from .serializers import LoginSerializer,UserSerializer,RegisterSerializer,ChangePasswordSerializer
+from .serializers import UserSerializer,RegisterSerializer,ChangePasswordSerializer
 
 
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -25,6 +24,7 @@ def get_tokens_for_user(user):
 
 UserModel = get_user_model()
 
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
 class LogoutAllView(APIView):
@@ -32,7 +32,7 @@ class LogoutAllView(APIView):
     Log the user out of all sessions
     I.E. deletes all auth tokens for the user
     '''
-    authentication_classes = (TokenAuthentication,SessionAuthentication)
+    authentication_classes = (JWTAuthentication)
     permission_classes = (IsAuthenticated,)
 
     def post(self, request, format=None):
@@ -58,7 +58,7 @@ class RegisterAPIView(GenericAPIView):
     
 class ChangePasswordView(UpdateAPIView):
     permission_classes = (IsAuthenticated,)
-    authentication_classes = [TokenAuthentication,SessionAuthentication]
+    authentication_classes = [JWTAuthentication]
     serializer_class = ChangePasswordSerializer
 
     def get_object(self, queryset=UserModel):
