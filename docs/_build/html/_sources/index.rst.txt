@@ -18,7 +18,7 @@ Framework](http://www.django-rest-framework.org/)
 Indices and tables
 ==================
 
-* :ref:`Getting Started`
+* :ref:`getting_started`
 * :ref:`search`
 
 
