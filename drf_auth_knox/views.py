@@ -25,9 +25,9 @@ class LoginAPIView(GenericAPIView):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        email = request.data.get('email', None)
+        username = request.data.get('username', None)
 
-        user = UserModel.objects.get(email=email)
+        user = UserModel.objects.get(username=username)
 
         instance, token = AuthToken.objects.create(user)
         login(request, user)
