@@ -1,9 +1,9 @@
 .. _autodoc:
  
-helloWorld.py
+DRF-AUTH
 =============
  
-.. automodule:: helloWorld
+.. automodule:: getting_started
   :members:
   :undoc-members:
  
