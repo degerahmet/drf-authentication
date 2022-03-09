@@ -5,10 +5,10 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
 	# Here is the module name.
-	name="drf_simple-auth-jwt",
+	name="drf_auth_simple",
 
 	# version of the module
-	version="0.0.8",
+	version="0.0.1",
 
 	# Name of Author
 	author="Ahmet Deger",
