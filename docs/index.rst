@@ -8,9 +8,20 @@ Django Rest Framework JSON Web Token & Knox Token authentication plugin for the 
 Framework](http://www.django-rest-framework.org/)
 
 
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+
+
 Indices and tables
 ==================
 
-* :ref:`genindex`
-* :ref:`modindex`
+* :ref:`Getting Started`
 * :ref:`search`
+
+
+
+Getting Started
+================

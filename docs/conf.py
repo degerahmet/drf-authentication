@@ -53,7 +53,7 @@ html_theme_options = {
 
 templates_path = ["_templates"]
 
-source_suffix = ".md"
+source_suffix = ".rst"
 
 master_doc = "index"
 
@@ -71,7 +71,6 @@ html_theme = "sphinx_rtd_theme"
 
 # html_theme_options = {}
 
-html_static_path = ["_static"]
 
 htmlhelp_basename = "drf-auth-doc"
 

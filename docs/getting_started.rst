@@ -1,4 +1,4 @@
-.. _creating_tokens_manually:
+.. _getting_started:
 
 Getting started
 ===============
