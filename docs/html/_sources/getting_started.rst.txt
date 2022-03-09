@@ -26,6 +26,16 @@ This package provides 4 different module.
  * Authentication with JWT & Custom User Model (drf_auth_jwt_cu)
  * Authentication with Knox & Custome User Model (drf_auth_knox_cu)
 
+after your choice your django project must be configured.
+
+.. code-block:: python
+
+  INSTALLED_APPS = [
+    ...
+    'drf_auth_jwt_cu',
+    ...
+  ] 
+
 
 If you use Authentication with Custom User Model(JWT or Knox)
 Then, your django project must be configured to use the library.  In ``settings.py``, add
@@ -46,6 +56,7 @@ For Knox
 
 
 Custom User Model: 
+
 .. code-block:: python
 
   class User(AbstractBaseUser):

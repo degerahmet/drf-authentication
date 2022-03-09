@@ -97,6 +97,14 @@ possible.</p>
 </ul>
 </dd>
 </dl>
+<p>after your choice your django project must be configured.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="o">...</span>
+  <span class="s1">&#39;drf_auth_jwt_cu&#39;</span><span class="p">,</span>
+  <span class="o">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
 <p>If you use Authentication with Custom User Model(JWT or Knox)
 Then, your django project must be configured to use the library.  In <code class="docutils literal notranslate"><span class="pre">settings.py</span></code>, add
 <code class="docutils literal notranslate"><span class="pre">AUTH_USER_MODEL</span></code>.</p>
@@ -108,39 +116,47 @@ Then, your django project must be configured to use the library.  In <code class
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">AUTH_USER_MODEL</span> <span class="o">=</span> <span class="s1">&#39;drf_auth_knox_cu.User&#39;</span>
 </pre></div>
 </div>
-<p>Custom User Model:
-.. code-block:: python</p>
-<blockquote>
-<div><dl>
-<dt>class User(AbstractBaseUser):</dt><dd><p>username    = None</p>
-<p>first_name = models.CharField(max_length=255,null=True,blank=True)
-last_name = models.CharField(max_length=255,null=True,blank=True)
-email = models.EmailField(db_index=True, unique=True)
-is_active = models.BooleanField(default=True)
-is_staff = models.BooleanField(default=False)</p>
-<p>is_superuser = models.BooleanField(default=False)
-created_at = models.DateTimeField(auto_now_add=True)</p>
-<p>updated_at = models.DateTimeField(auto_now=True)</p>
-<p>USERNAME_FIELD = ‘email’
-REQUIRED_FIELDS = []</p>
-<p>objects = UserManager()</p>
-<dl class="simple">
-<dt>def __str__(self):</dt><dd><p>return self.email</p>
-</dd>
-<dt>def has_perm(self, perm, obj=None):</dt><dd><p>return self.is_superuser</p>
-</dd>
-<dt>def has_module_perms(self, app_label):</dt><dd><p>return True</p>
-</dd>
-<dt>def __str__(self):</dt><dd><p>return self.email</p>
-</dd>
-<dt>def get_full_name(self):</dt><dd><p>return str(self.first_name + self.last_name)</p>
-</dd>
-<dt>def get_short_name(self):</dt><dd><p>return self.first_name</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</div></blockquote>
+<p>Custom User Model:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">AbstractBaseUser</span><span class="p">):</span>
+    <span class="n">username</span>    <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">first_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">last_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">EmailField</span><span class="p">(</span><span class="n">db_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">is_active</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">is_staff</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">is_superuser</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">created_at</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now_add</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">updated_at</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+    <span class="n">USERNAME_FIELD</span> <span class="o">=</span> <span class="s1">&#39;email&#39;</span>
+    <span class="n">REQUIRED_FIELDS</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">objects</span> <span class="o">=</span> <span class="n">UserManager</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">email</span>
+
+    <span class="k">def</span> <span class="nf">has_perm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">perm</span><span class="p">,</span> <span class="n">obj</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_superuser</span>
+
+    <span class="k">def</span> <span class="nf">has_module_perms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_label</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">email</span>
+
+
+    <span class="k">def</span> <span class="nf">get_full_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">first_name</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_short_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_name</span>
+</pre></div>
+</div>
 </section>
 </section>
 
