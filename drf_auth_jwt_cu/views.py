@@ -15,27 +15,17 @@ from django.contrib.auth import get_user_model,login,logout
 from .serializers import LoginSerializer,UserSerializer,RegisterSerializer,ChangePasswordSerializer
 
 
+from rest_framework_simplejwt.tokens import RefreshToken
+
+def get_tokens_for_user(user):
+    refresh = RefreshToken.for_user(user)
+
+    return {
+        'refresh': str(refresh),
+        'access': str(refresh.access_token),
+    }
 
 UserModel = get_user_model()
-
-class LoginAPIView(GenericAPIView):
-    serializer_class = LoginSerializer
-    permission_classes = [AllowAny]
-
-    def post(self, request, *args, **kwargs):
-        serializer = LoginSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-
-        email = request.data.get('email', None)
-
-        user = UserModel.objects.get(email=email)
-
-        instance, token = AuthToken.objects.create(user)
-        login(request, user)
-        return Response({
-            "user"  : UserSerializer(user,context=serializer).data,
-            "token" : token
-        })
 
 
 
@@ -52,6 +42,9 @@ class LogoutAllView(APIView):
         logout(request)
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
+
+
+    
 class RegisterAPIView(GenericAPIView):
     serializer_class = RegisterSerializer
     def post(self, request, *args, **kwargs):
@@ -59,11 +52,10 @@ class RegisterAPIView(GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
 
-        instance, token = AuthToken.objects.create(user)
         login(request, user)
         return Response({
             "user"  : UserSerializer(user,context=serializer).data,
-            "token" : token
+            "token" : get_tokens_for_user(user)
         })
     
 class ChangePasswordView(UpdateAPIView):
