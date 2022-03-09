@@ -18,6 +18,7 @@ Installation
 ------------
 
 Django Rest Framework Authentication can be installed with pip::
+
   pip install drf-auth-simple
 
 This package provides 4 different module.
