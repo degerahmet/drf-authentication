@@ -49,11 +49,23 @@ For JWT
 
   AUTH_USER_MODEL = 'drf_auth_jwt_cu.User'
 
+  REST_FRAMEWORK = {
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+  }
+
 For Knox 
 
 .. code-block:: python
 
   AUTH_USER_MODEL = 'drf_auth_knox_cu.User'
+
+  REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+    ...
+  }
 
 
 Custom User Model: 
@@ -98,3 +110,56 @@ Custom User Model:
 
       def get_short_name(self):
           return self.first_name
+
+If you use Custom User Model:
+
+For JWT
+
+Apply the migrations for the models:
+
+.. code-block:: bash
+
+  python manage.py makemigrations drf_auth_jwt_cu
+
+
+
+For Knox
+
+Apply the migrations for the models:
+
+.. code-block:: bash
+
+  python manage.py makemigrations drf_auth_jwt_cu
+
+
+.. code-block:: bash
+
+  python manage.py migrate
+
+Also, in your root ``urls.py`` file (or any other url config), include routes
+for DRF AUTH SIMPLE (Write which of these 4 modules you used and add .urls at the end as a parameter to the include function):
+
+For example if you use ``drf_auth_jwt`` then you will type 
+
+.. code-block:: python
+
+  from django.urls import path,include
+
+  urlpatterns = [
+    ...
+    path('auth/', include('drf_auth_jwt.urls')),
+    ...
+  ]
+
+or if you use ``drf_auth_knox_cu`` then you will type
+
+.. code-block:: python
+
+  from django.urls import path,include
+
+  urlpatterns = [
+    ...
+    path('auth/', include('drf_auth_knox_cu.urls')),
+    ...
+      
+  ]

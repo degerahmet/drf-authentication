@@ -112,10 +112,22 @@ Then, your django project must be configured to use the library.  In <code class
 <code class="docutils literal notranslate"><span class="pre">AUTH_USER_MODEL</span></code>.</p>
 <p>For JWT</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">AUTH_USER_MODEL</span> <span class="o">=</span> <span class="s1">&#39;drf_auth_jwt_cu.User&#39;</span>
+
+<span class="n">REST_FRAMEWORK</span> <span class="o">=</span> <span class="p">{</span>
+
+  <span class="s1">&#39;DEFAULT_AUTHENTICATION_CLASSES&#39;</span><span class="p">:</span> <span class="p">(</span>
+      <span class="s1">&#39;rest_framework_simplejwt.authentication.JWTAuthentication&#39;</span><span class="p">,</span>
+  <span class="p">)</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>For Knox</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">AUTH_USER_MODEL</span> <span class="o">=</span> <span class="s1">&#39;drf_auth_knox_cu.User&#39;</span>
+
+<span class="n">REST_FRAMEWORK</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;DEFAULT_AUTHENTICATION_CLASSES&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;knox.auth.TokenAuthentication&#39;</span><span class="p">,),</span>
+  <span class="o">...</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>Custom User Model:</p>
@@ -157,6 +169,43 @@ Then, your django project must be configured to use the library.  In <code class
 
     <span class="k">def</span> <span class="nf">get_short_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_name</span>
+</pre></div>
+</div>
+<p>If you use Custom User Model:</p>
+<p>For JWT</p>
+<p>Apply the migrations for the models:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python manage.py makemigrations drf_auth_jwt_cu
+</pre></div>
+</div>
+<p>For Knox</p>
+<p>Apply the migrations for the models:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python manage.py makemigrations drf_auth_jwt_cu
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python manage.py migrate
+</pre></div>
+</div>
+<p>Also, in your root <code class="docutils literal notranslate"><span class="pre">urls.py</span></code> file (or any other url config), include routes
+for DRF AUTH SIMPLE (Write which of these 4 modules you used and add .urls at the end as a parameter to the include function):</p>
+<p>For example if you use <code class="docutils literal notranslate"><span class="pre">drf_auth_jwt</span></code> then you will type</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span><span class="p">,</span><span class="n">include</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="o">...</span>
+  <span class="n">path</span><span class="p">(</span><span class="s1">&#39;auth/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;drf_auth_jwt.urls&#39;</span><span class="p">)),</span>
+  <span class="o">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>or if you use <code class="docutils literal notranslate"><span class="pre">drf_auth_knox_cu</span></code> then you will type</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span><span class="p">,</span><span class="n">include</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="o">...</span>
+  <span class="n">path</span><span class="p">(</span><span class="s1">&#39;auth/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;drf_auth_knox_cu.urls&#39;</span><span class="p">)),</span>
+  <span class="o">...</span>
+
+<span class="p">]</span>
 </pre></div>
 </div>
 </section>
