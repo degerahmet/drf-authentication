@@ -61,6 +61,12 @@ class RegisterSerializer(serializers.ModelSerializer):
         model = UserModel
         fields = ('first_name','last_name','email', 'password')
         extra_kwargs = {'password': {'write_only': True}}
+        
+    def validate_email(self,email):
+        user = UserModel.objects.filter(email=email).first()
+        if user:
+            raise serializers.ValidationError({"email":"Email already signed up."})
+        return email
 
     def create(self, validated_data):
         password = validated_data.pop('password', None)
