@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView,UpdateAPIView
 from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework.views import APIView
-
+from rest_framework.authentication import SessionAuthentication
 
 
 from django.contrib.auth import get_user_model,login,logout
@@ -49,7 +49,7 @@ class LogoutAllView(APIView):
     Log the user out of all sessions
     I.E. deletes all auth tokens for the user
     '''
-    authentication_classes = (JWTAuthentication)
+    authentication_classes = (SessionAuthentication,JWTAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     def post(self, request, format=None):
@@ -59,10 +59,14 @@ class LogoutAllView(APIView):
         if outstandingTokens:
             for outstandingToken in outstandingTokens:
                 token_base_encoded_string = outstandingToken.token
-                token = RefreshToken(token_base_encoded_string)
-                token.blacklist()
-        logout(request)
+                try :
+                    token = RefreshToken(token_base_encoded_string)
+                    token.blacklist()
+                except :
+                    pass
+            logout(request)
         return Response(None, status=status.HTTP_204_NO_CONTENT)
+
 
 
 
