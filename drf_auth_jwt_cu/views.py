@@ -5,8 +5,6 @@ from rest_framework.permissions import AllowAny,IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.authentication import SessionAuthentication
 
-from knox.models import AuthToken
-from knox.auth import TokenAuthentication
 
 
 from django.contrib.auth import get_user_model,login,logout
