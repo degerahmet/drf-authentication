@@ -3,7 +3,6 @@ from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView,UpdateAPIView
 from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework.views import APIView
-from rest_framework.authentication import SessionAuthentication
 
 
 from django.contrib.auth import get_user_model,login,logout
@@ -49,7 +48,7 @@ class LogoutAllView(APIView):
     Log the user out of all sessions
     I.E. deletes all auth tokens for the user
     '''
-    authentication_classes = (SessionAuthentication,JWTAuthentication,)
+    authentication_classes = (JWTAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     def post(self, request, format=None):

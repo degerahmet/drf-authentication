@@ -8,7 +8,7 @@ setuptools.setup(
 	name="drf_auth_simple",
 
 	# version of the module
-	version="0.0.7",
+	version="0.0.9",
 
 	# Name of Author
 	author="Ahmet Deger",
