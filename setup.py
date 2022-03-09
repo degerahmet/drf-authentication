@@ -8,7 +8,7 @@ setuptools.setup(
 	name="drf_auth_simple",
 
 	# version of the module
-	version="0.0.4",
+	version="0.0.6",
 
 	# Name of Author
 	author="Ahmet Deger",
@@ -40,6 +40,7 @@ setuptools.setup(
 		"djangorestframework-simplejwt",
 		"boto3",
 		"jwt",
+		'PyJWT>=2.3.0',
 		"datetime",
 	],
 

@@ -61,7 +61,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         model = UserModel
         fields = ('first_name','last_name','email', 'password')
         extra_kwargs = {'password': {'write_only': True}}
-        
+
     def validate_email(self,email):
         user = UserModel.objects.filter(email=email).first()
         if user:
@@ -104,3 +104,7 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
         instance.set_password(validated_data['password'])
         instance.save()
         return instance
+
+
+class RefreshTokenSerializer(serializers.Serializer):
+    refresh_token = serializers.CharField(max_length=500, required=True)

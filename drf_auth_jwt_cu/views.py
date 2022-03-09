@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView,UpdateAPIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework.views import APIView
 
 
@@ -9,7 +9,7 @@ from rest_framework.views import APIView
 from django.contrib.auth import get_user_model,login,logout
 
 
-from .serializers import UserSerializer,RegisterSerializer,ChangePasswordSerializer
+from .serializers import UserSerializer,RegisterSerializer,ChangePasswordSerializer,RefreshTokenSerializer
 
 
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -27,6 +27,23 @@ UserModel = get_user_model()
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
+
+class BlacklistTokenUpdateView(GenericAPIView):
+    permission_classes = [AllowAny]
+    authentication_classes = ()
+    serializer_class = RefreshTokenSerializer
+
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh_token"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response(status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+from rest_framework_simplejwt.token_blacklist.models import OutstandingToken
+
 class LogoutAllView(APIView):
     '''
     Log the user out of all sessions
@@ -36,7 +53,14 @@ class LogoutAllView(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request, format=None):
-        request.user.auth_token_set.all().delete()
+        user = request.user
+        outstandingTokens = OutstandingToken.objects.filter(user=user)
+
+        if outstandingTokens:
+            for outstandingToken in outstandingTokens:
+                token_base_encoded_string = outstandingToken.token
+                token = RefreshToken(token_base_encoded_string)
+                token.blacklist()
         logout(request)
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
