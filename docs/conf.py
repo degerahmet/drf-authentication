@@ -53,7 +53,7 @@ html_theme_options = {
 
 templates_path = ["_templates"]
 
-source_suffix = ".rst"
+source_suffix = ".md"
 
 master_doc = "index"
 
