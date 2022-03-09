@@ -86,10 +86,56 @@ possible.</p>
 </section>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h2>
-<p>Django Rest Framework Authentication can be installed with pip:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>``pip install drf-auth-simple``
+<dl class="simple">
+<dt>Django Rest Framework Authentication can be installed with pip::</dt><dd><p>pip install drf-auth-simple</p>
+</dd>
+<dt>This package provides 4 different module.</dt><dd><ul class="simple">
+<li><p>Authentication with JWT (drf_auth_jwt)</p></li>
+<li><p>Authentication with Knox (drf_auth_knox)</p></li>
+<li><p>Authentication with JWT &amp; Custom User Model (drf_auth_jwt_cu)</p></li>
+<li><p>Authentication with Knox &amp; Custome User Model (drf_auth_knox_cu)</p></li>
+</ul>
+</dd>
+</dl>
+<p>If you use Authentication with Custom User Model(JWT or Knox)
+Then, your django project must be configured to use the library.  In <code class="docutils literal notranslate"><span class="pre">settings.py</span></code>, add
+<code class="docutils literal notranslate"><span class="pre">AUTH_USER_MODEL</span></code>.</p>
+<p>For JWT</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">AUTH_USER_MODEL</span> <span class="o">=</span> <span class="s1">&#39;drf_auth_jwt_cu.User&#39;</span>
 </pre></div>
 </div>
+<p>For Knox</p>
+<p>Custom User Model:
+.. code-block:: python</p>
+<dl>
+<dt>class User(AbstractBaseUser):</dt><dd><p>username    = None</p>
+<p>first_name = models.CharField(max_length=255,null=True,blank=True)
+last_name = models.CharField(max_length=255,null=True,blank=True)
+email = models.EmailField(db_index=True, unique=True)
+is_active = models.BooleanField(default=True)
+is_staff = models.BooleanField(default=False)</p>
+<p>is_superuser = models.BooleanField(default=False)
+created_at = models.DateTimeField(auto_now_add=True)</p>
+<p>updated_at = models.DateTimeField(auto_now=True)</p>
+<p>USERNAME_FIELD = ‘email’
+REQUIRED_FIELDS = []</p>
+<p>objects = UserManager()</p>
+<dl class="simple">
+<dt>def __str__(self):</dt><dd><p>return self.email</p>
+</dd>
+<dt>def has_perm(self, perm, obj=None):</dt><dd><p>return self.is_superuser</p>
+</dd>
+<dt>def has_module_perms(self, app_label):</dt><dd><p>return True</p>
+</dd>
+<dt>def __str__(self):</dt><dd><p>return self.email</p>
+</dd>
+<dt>def get_full_name(self):</dt><dd><p>return str(self.first_name + self.last_name)</p>
+</dd>
+<dt>def get_short_name(self):</dt><dd><p>return self.first_name</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </section>
 </section>
 
