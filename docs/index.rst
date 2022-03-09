@@ -9,19 +9,10 @@ Framework <http://www.django-rest-framework.org/>`_.
 
 
 
+Contents
+--------
+
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+    :maxdepth: 3
 
-
-
-Indices and tables
-==================
-
-* :ref:`getting_started`
-* :ref:`search`
-
-
-
-Getting Started
-================
+    getting_started
