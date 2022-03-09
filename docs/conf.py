@@ -60,7 +60,7 @@ master_doc = "index"
 project = "Django Rest Framework Authentication"
 copyright = "2022, Ahmet Deger"
 
-release = get_distribution("drf-authenticaton").version
+release = get_distribution("drf-auth-simple").version
 
 # The short X.Y version.
 version = ".".join(release.split(".")[:2])
