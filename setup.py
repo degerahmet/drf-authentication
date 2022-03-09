@@ -8,7 +8,7 @@ setuptools.setup(
 	name="drf_auth_simple",
 
 	# version of the module
-	version="1.0.2",
+	version="1.0.3",
 
 	# Name of Author
 	author="Ahmet Deger",
@@ -26,7 +26,7 @@ setuptools.setup(
 	long_description_content_type="text/markdown",
 
 	# Any link to reach this module, ***if*** you have any webpage or github profile
-	url="https://github.com/degerahmet/",
+	url="https://github.com/degerahmet/drf-authentication",
 	packages=setuptools.find_packages(),
 
 

@@ -138,7 +138,6 @@ class RequestPasswordResetEmailView(GenericAPIView):
     def create_link(self,user,request):
         uidb64 = urlsafe_base64_encode(smart_bytes(user.id))
         token = PasswordResetTokenGenerator().make_token(user)
-        #current_site = FRONTEND URL
         
         current_site = get_current_site(request=request).domain
         relativeLink = reverse('password-reset-confirm', kwargs={'uidb64': uidb64, 'token': token})
@@ -174,7 +173,6 @@ class RequestPasswordResetEmailView(GenericAPIView):
             return Response({'error': 'E-mail does not exists.'}, status=status.HTTP_400_BAD_REQUEST)
 
 class PasswordTokenCheckAPI(GenericAPIView):
-    serializer_class = SetNewPasswordSerializer
 
     def get(self, request, uidb64, token):
         try:
