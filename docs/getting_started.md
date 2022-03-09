@@ -1,3 +1,5 @@
+.. _creating_tokens_manually:
+
 Getting started
 ===============
 
