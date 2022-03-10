@@ -4,7 +4,7 @@ API endpoints
 =============
 
 Basic
-=====
+--------
 
 
 
@@ -47,7 +47,7 @@ Basic
     * old_password
 
 
-* /auth/user/ (GET, PUT, PATCH)
+* /auth/user/ (GET)
 
     * username
     * first_name
@@ -56,8 +56,16 @@ Basic
     Returns pk, username, email, first_name, last_name
 
 
+* /auth/user/ (GET, PATCH)
+
+    * first_name
+    * last_name
+
+    Returns pk, username, email, first_name, last_name
+
+
 Registration
-============
+-------------
 
 * /auth/registration/ (POST)
 

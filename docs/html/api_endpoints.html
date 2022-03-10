@@ -44,9 +44,11 @@
 <li class="toctree-l1"><a class="reference internal" href="email_configuration.html">Email Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="jwt_settings.html">Jwt Settings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="knox_settings.html">Knox Settings</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">API endpoints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#basic">Basic</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#registration">Registration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API endpoints</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic">Basic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#registration">Registration</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -75,9 +77,8 @@
              
   <section id="api-endpoints">
 <span id="id1"></span><h1>API endpoints<a class="headerlink" href="#api-endpoints" title="Permalink to this headline"></a></h1>
-</section>
 <section id="basic">
-<h1>Basic<a class="headerlink" href="#basic" title="Permalink to this headline"></a></h1>
+<h2>Basic<a class="headerlink" href="#basic" title="Permalink to this headline"></a></h2>
 <ul>
 <li><p>/auth/login/ (POST)</p>
 <blockquote>
@@ -134,7 +135,7 @@
 </ul>
 </div></blockquote>
 </li>
-<li><p>/auth/user/ (GET, PUT, PATCH)</p>
+<li><p>/auth/user/ (GET)</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>username</p></li>
@@ -144,10 +145,19 @@
 <p>Returns pk, username, email, first_name, last_name</p>
 </div></blockquote>
 </li>
+<li><p>/auth/user/ (GET, PATCH)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>first_name</p></li>
+<li><p>last_name</p></li>
+</ul>
+<p>Returns pk, username, email, first_name, last_name</p>
+</div></blockquote>
+</li>
 </ul>
 </section>
 <section id="registration">
-<h1>Registration<a class="headerlink" href="#registration" title="Permalink to this headline"></a></h1>
+<h2>Registration<a class="headerlink" href="#registration" title="Permalink to this headline"></a></h2>
 <ul>
 <li><p>/auth/registration/ (POST)</p>
 <blockquote>
@@ -160,6 +170,7 @@
 </div></blockquote>
 </li>
 </ul>
+</section>
 </section>
 
 
