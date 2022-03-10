@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Django Rest Framework Authentication (Knox &amp; JWT) &mdash; drf-auth-simple 1.0.2 documentation</title>
+  <title>API endpoints &mdash; drf-auth-simple 1.0.2 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -18,7 +18,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Getting started" href="getting_started.html" /> 
+    <link rel="prev" title="Knox Settings" href="knox_settings.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -26,7 +26,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="#" class="icon icon-home"> drf-auth-simple
+            <a href="index.html" class="icon icon-home"> drf-auth-simple
           </a>
               <div class="version">
                 1.0
@@ -39,14 +39,14 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="email_configuration.html">Email Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="jwt_settings.html">Jwt Settings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="knox_settings.html">Knox Settings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api_endpoints.html">API endpoints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api_endpoints.html#basic">Basic</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api_endpoints.html#registration">Registration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#basic">Basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#registration">Registration</a></li>
 </ul>
 
         </div>
@@ -55,17 +55,17 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">drf-auth-simple</a>
+          <a href="index.html">drf-auth-simple</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-      <li>Django Rest Framework Authentication (Knox &amp; JWT)</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>API endpoints</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/api_endpoints.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -73,40 +73,92 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="django-rest-framework-authentication-knox-jwt">
-<h1>Django Rest Framework Authentication (Knox &amp; JWT)<a class="headerlink" href="#django-rest-framework-authentication-knox-jwt" title="Permalink to this headline"></a></h1>
-<section id="abstract">
-<h2>Abstract<a class="headerlink" href="#abstract" title="Permalink to this headline"></a></h2>
-<p>Django Rest Framework JSON Web Token &amp; Knox Token authentication plugin for the <a class="reference external" href="http://www.django-rest-framework.org/">Django REST
-Framework</a>.</p>
+  <section id="api-endpoints">
+<span id="id1"></span><h1>API endpoints<a class="headerlink" href="#api-endpoints" title="Permalink to this headline"></a></h1>
 </section>
-<section id="contents">
-<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline"></a></h2>
-<div class="toctree-wrapper compound">
+<section id="basic">
+<h1>Basic<a class="headerlink" href="#basic" title="Permalink to this headline"></a></h1>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#requirements">Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#installation">Installation</a></li>
+<li><p>/auth/login/ (POST)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>email</p></li>
+<li><p>password</p></li>
 </ul>
+<p>Returns Token key</p>
+</div></blockquote>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="email_configuration.html">Email Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="jwt_settings.html">Jwt Settings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="knox_settings.html">Knox Settings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api_endpoints.html">API endpoints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api_endpoints.html#basic">Basic</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api_endpoints.html#registration">Registration</a></li>
+<li><dl class="simple">
+<dt>/auth/token/refresh/ (POST)</dt><dd><ul class="simple">
+<li><p>refresh_token</p></li>
 </ul>
+</dd>
+</dl>
+</li>
+<li><p>/auth/logout/ (POST)</p></li>
+<li><p>/auth/logoutall/ (POST)</p></li>
+<li><p>/auth/user/ (POST)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>email</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>/auth/request-password-reset-email/ (POST)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>email</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>/auth/check-password-reset/&lt;uidb64&gt;/&lt;token&gt;/ (GET)</p></li>
+<li><p>/auth/complete-password-reset/ (POST)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>uid64</p></li>
+<li><p>token</p></li>
+<li><p>password</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>uid64 and token are sent in email after calling /auth/request-password-reset-email/</p>
 </div>
+</div></blockquote>
+</li>
+<li><p>/auth/change_password/ (POST)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>new_password1</p></li>
+<li><p>new_password2</p></li>
+<li><p>old_password</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>/auth/user/ (GET, PUT, PATCH)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>username</p></li>
+<li><p>first_name</p></li>
+<li><p>last_name</p></li>
+</ul>
+<p>Returns pk, username, email, first_name, last_name</p>
+</div></blockquote>
+</li>
+</ul>
 </section>
-</section>
-<section id="features">
-<h1>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h1>
-<ul class="simple">
-<li><p>User Registration</p></li>
-<li><p>Login/Logout</p></li>
-<li><p>Retrieve/Update the Django User model</p></li>
-<li><p>Password change</p></li>
-<li><p>Password reset via e-mail</p></li>
+<section id="registration">
+<h1>Registration<a class="headerlink" href="#registration" title="Permalink to this headline"></a></h1>
+<ul>
+<li><p>/auth/registration/ (POST)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>username</p></li>
+<li><p>password1</p></li>
+<li><p>password2</p></li>
+<li><p>email</p></li>
+</ul>
+</div></blockquote>
+</li>
 </ul>
 </section>
 
@@ -114,7 +166,7 @@ Framework</a>.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="getting_started.html" class="btn btn-neutral float-right" title="Getting started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="knox_settings.html" class="btn btn-neutral float-left" title="Knox Settings" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

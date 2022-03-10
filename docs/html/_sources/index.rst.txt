@@ -19,6 +19,7 @@ Contents
     email_configuration
     jwt_settings
     knox_settings
+    api_endpoints
 
 
 
