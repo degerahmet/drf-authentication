@@ -163,3 +163,4 @@ or if you use ``drf_auth_knox_cu`` then you will type
     ...
       
   ]
+
