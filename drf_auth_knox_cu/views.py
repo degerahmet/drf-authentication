@@ -7,6 +7,7 @@ from rest_framework.authentication import SessionAuthentication
 
 from knox.models import AuthToken
 from knox.auth import TokenAuthentication
+from django.conf import settings
 
 
 from django.contrib.auth import get_user_model,login,logout
@@ -106,7 +107,7 @@ class RequestPasswordResetEmailView(GenericAPIView):
         uidb64 = urlsafe_base64_encode(smart_bytes(user.id))
         token = PasswordResetTokenGenerator().make_token(user)
         
-        current_site = get_current_site(request=request).domain
+        current_site = settings.SITE_URL
         relativeLink = reverse('password-reset-confirm', kwargs={'uidb64': uidb64, 'token': token})
         absurl = 'http://' + current_site + relativeLink
 

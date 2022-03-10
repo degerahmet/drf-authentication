@@ -131,6 +131,7 @@ from django.shortcuts import redirect
 from django.contrib.sites.shortcuts import get_current_site
 
 from .utils import Util
+from django.conf import settings
 
 
 class RequestPasswordResetEmailView(GenericAPIView):
@@ -140,7 +141,7 @@ class RequestPasswordResetEmailView(GenericAPIView):
         uidb64 = urlsafe_base64_encode(smart_bytes(user.id))
         token = PasswordResetTokenGenerator().make_token(user)
         
-        current_site = get_current_site(request=request).domain
+        current_site = settings.SITE_URL
         relativeLink = reverse('password-reset-confirm', kwargs={'uidb64': uidb64, 'token': token})
         absurl = 'http://' + current_site + relativeLink
 
