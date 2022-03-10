@@ -18,6 +18,7 @@ Contents
     getting_started
     email_configuration
     jwt_settings
+    knox_settings
 
 
 
@@ -25,9 +26,9 @@ Features
 =========
 
 
-*. User Registration
-*. Login/Logout
-*. Retrieve/Update the Django User model
-*. Password change
-*. Password reset via e-mail
+* User Registration
+* Login/Logout
+* Retrieve/Update the Django User model
+* Password change
+* Password reset via e-mail
 

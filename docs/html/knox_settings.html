@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Django Rest Framework Authentication (Knox &amp; JWT) &mdash; drf-auth-simple 1.0.2 documentation</title>
+  <title>Knox Settings &mdash; drf-auth-simple 1.0.2 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -18,7 +18,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Getting started" href="getting_started.html" /> 
+    <link rel="prev" title="Jwt Settings" href="jwt_settings.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -26,7 +26,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="#" class="icon icon-home"> drf-auth-simple
+            <a href="index.html" class="icon icon-home"> drf-auth-simple
           </a>
               <div class="version">
                 1.0
@@ -39,11 +39,11 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="email_configuration.html">Email Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="jwt_settings.html">Jwt Settings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="knox_settings.html">Knox Settings</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Knox Settings</a></li>
 </ul>
 
         </div>
@@ -52,17 +52,17 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">drf-auth-simple</a>
+          <a href="index.html">drf-auth-simple</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-      <li>Django Rest Framework Authentication (Knox &amp; JWT)</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Knox Settings</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/knox_settings.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -70,45 +70,38 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="django-rest-framework-authentication-knox-jwt">
-<h1>Django Rest Framework Authentication (Knox &amp; JWT)<a class="headerlink" href="#django-rest-framework-authentication-knox-jwt" title="Permalink to this headline"></a></h1>
-<section id="abstract">
-<h2>Abstract<a class="headerlink" href="#abstract" title="Permalink to this headline"></a></h2>
-<p>Django Rest Framework JSON Web Token &amp; Knox Token authentication plugin for the <a class="reference external" href="http://www.django-rest-framework.org/">Django REST
-Framework</a>.</p>
-</section>
-<section id="contents">
-<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline"></a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#requirements">Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#installation">Installation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="email_configuration.html">Email Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="jwt_settings.html">Jwt Settings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="knox_settings.html">Knox Settings</a></li>
-</ul>
+  <section id="knox-settings">
+<span id="id1"></span><h1>Knox Settings<a class="headerlink" href="#knox-settings" title="Permalink to this headline"></a></h1>
+<blockquote>
+<div><p><cite>knox.settings</cite></p>
+</div></blockquote>
+<p>Settings in Knox are handled in a similar way to the rest framework settings.
+All settings are namespaced in the <code class="docutils literal notranslate"><span class="pre">REST_KNOX</span></code> setting.</p>
+<p>Example <code class="docutils literal notranslate"><span class="pre">settings.py</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># These are the default values if none are set</span>
+
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">rest_framework.settings</span> <span class="kn">import</span> <span class="n">api_settings</span>
+
+<span class="n">REST_KNOX</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;SECURE_HASH_ALGORITHM&#39;</span><span class="p">:</span> <span class="s1">&#39;cryptography.hazmat.primitives.hashes.SHA512&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;AUTH_TOKEN_CHARACTER_LENGTH&#39;</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>
+    <span class="s1">&#39;TOKEN_TTL&#39;</span><span class="p">:</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span>
+    <span class="s1">&#39;USER_SERIALIZER&#39;</span><span class="p">:</span> <span class="s1">&#39;knox.serializers.UserSerializer&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TOKEN_LIMIT_PER_USER&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;AUTO_REFRESH&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&#39;EXPIRY_DATETIME_FORMAT&#39;</span><span class="p">:</span> <span class="n">api_settings</span><span class="o">.</span><span class="n">DATETIME_FORMAT</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
 </div>
-</section>
-</section>
-<section id="features">
-<h1>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h1>
-<ul class="simple">
-<li><p>User Registration</p></li>
-<li><p>Login/Logout</p></li>
-<li><p>Retrieve/Update the Django User model</p></li>
-<li><p>Password change</p></li>
-<li><p>Password reset via e-mail</p></li>
-</ul>
+<p>For full documentation, visit <a class="reference external" href="https://james1345.github.io/django-rest-knox/settings/">Django-Rest-Knox</a>.</p>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="getting_started.html" class="btn btn-neutral float-right" title="Getting started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="jwt_settings.html" class="btn btn-neutral float-left" title="Jwt Settings" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

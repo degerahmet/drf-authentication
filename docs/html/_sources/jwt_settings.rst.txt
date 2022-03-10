@@ -5,7 +5,7 @@ Jwt Settings
 ====================
 
 Simple JWT package is used in this package. 
-Some of Simple JWT’s behavior can be customized through settings variables in settings.py
+Some of Simple JWT’s behavior can be customized through settings variables in ``settings.py``
 
 .. code-block:: python
 
