@@ -16,3 +16,18 @@ Contents
     :maxdepth: 3
 
     getting_started
+    email_configuration
+    jwt_settings
+
+
+
+Features
+=========
+
+
+*. User Registration
+*. Login/Logout
+*. Retrieve/Update the Django User model
+*. Password change
+*. Password reset via e-mail
+
