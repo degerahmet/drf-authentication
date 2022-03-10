@@ -3,7 +3,7 @@
 Knox Settings
 ===============
 
- `knox.settings`
+ ``knox.settings``
 
 Settings in Knox are handled in a similar way to the rest framework settings.
 All settings are namespaced in the ``REST_KNOX`` setting.
