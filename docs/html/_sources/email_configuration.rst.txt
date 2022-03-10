@@ -1,7 +1,7 @@
 .. _email_configuration:
 
 
-EMAIL CONFIGURATION
+Email Configuration
 ====================
 
 Your django project must be configured to use the library.  In ``settings.py``, add
@@ -14,4 +14,3 @@ For JWT
 
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-    

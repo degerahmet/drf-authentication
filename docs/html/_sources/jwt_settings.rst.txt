@@ -1,7 +1,7 @@
 .. _jwt_settings:
 
 
-JWT SETTINGS
+Jwt Settings
 ====================
 
 Simple JWT package is used in this package. 
