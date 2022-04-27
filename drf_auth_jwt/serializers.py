@@ -53,13 +53,12 @@ class LoginSerializer(serializers.Serializer):
         return user
 
 class RegisterSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(min_length=3, required=True)
     email = serializers.EmailField(required=True)
     password = serializers.CharField(min_length=8, write_only=True)
 
     class Meta:
         model = UserModel
-        fields = ('first_name','last_name','email', 'username', 'password')
+        fields = ('first_name','last_name','email', 'password')
         extra_kwargs = {'password': {'write_only': True}}
 
     def validate_email(self,email):
@@ -67,12 +66,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         if user:
             raise serializers.ValidationError({"email":"Email already signed up."})
         return email
-        
-    def validate_username(self,username):
-        user = UserModel.objects.filter(username=username).first()
-        if user:
-            raise serializers.ValidationError({"email":"Email already signed up."})
-        return username
+
 
     def create(self, validated_data):
         password = validated_data.pop('password', None)
